@@ -1,208 +1,73 @@
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
         <link rel="canonical" href="https://afaucogney.github.io/flipper-ktp/releasing/">
-      
-      
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
-    
-    
-      
+        <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Releasing LeakCanary - Flipper Ktp</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/main.19753c6b.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
-        
-      
-    
-    
-    
-      
-        
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
-    
-    
-    
-    
-      
-    
-    
-  </head>
-  
-  
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
-      
-  
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#releasing-leakcanary" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="https://afaucogney.github.io/flipper-ktp/" title="Flipper Ktp" class="md-header-nav__button md-logo" aria-label="Flipper Ktp">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
 
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
-            Flipper Ktp
-          </span>
-          <span class="md-header-nav__topic md-ellipsis">
-            
-              Releasing LeakCanary
-            
-          </span>
-        </div>
-      
-    </div>
-    
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-    
-  </nav>
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Flipper Ktp</a>
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="https://afaucogney.github.io/flipper-ktp/" title="Flipper Ktp" class="md-nav__button md-logo" aria-label="Flipper Ktp">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
 
-    </a>
-    Flipper Ktp
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href=".." class="md-nav__link">
-      Overview
-    </a>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
     
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
             
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
-              
-                
-                
-                <h1 id="releasing-leakcanary">Releasing LeakCanary</h1>
+            <li class="nav-item" data-level="1"><a href="#releasing-leakcanary" class="nav-link">Releasing LeakCanary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="releasing-leakcanary">Releasing LeakCanary</h1>
 <ul>
 <li>Make sure you have the docsite Google Analytics key set up in your <code>~/.bashrc</code>:</li>
 </ul>
 <pre><code>export LEAKCANARY_GOOGLE_ANALYTICS_KEY=&quot;UA-_________&quot;
 </code></pre>
+
 <ul>
 <li>Create a local release branch from <code>main</code></li>
 </ul>
@@ -210,11 +75,13 @@
 git pull
 git checkout -b release_{{ flipper_ktp.next_release }}
 </code></pre>
+
 <ul>
 <li>Update <code>VERSION_NAME</code> in <code>gradle.properties</code> (remove <code>-SNAPSHOT</code>)</li>
 </ul>
-<pre><code class="language-gradle">VERSION_NAME={{ flipper_ktp.next_release }}
+<pre><code class="gradle">VERSION_NAME={{ flipper_ktp.next_release }}
 </code></pre>
+
 <ul>
 <li>Update the current version and next version in <code>mkdocs.yml</code>:</li>
 </ul>
@@ -223,17 +90,20 @@ git checkout -b release_{{ flipper_ktp.next_release }}
     release: '{{ flipper_ktp.next_release }}'
     next_release: 'REPLACE_WITH_NEXT_VERSION_NUMBER'
 </code></pre>
+
 <ul>
 <li>Generate the Dokka docs</li>
 </ul>
 <pre><code>rm -rf docs/api
 ./gradlew leakcanary-android-core:dokka leakcanary-android-instrumentation:dokka leakcanary-android-process:dokka leakcanary-object-watcher-android:dokka leakcanary-object-watcher:dokka shark-android:dokka shark-graph:dokka shark-hprof:dokka shark-log:dokka shark:dokka plumber-android:dokka
 </code></pre>
+
 <ul>
 <li>Confirm all API changes are intentional</li>
 </ul>
 <pre><code>git diff docs/api
 </code></pre>
+
 <ul>
 <li>Update <code>docs/changelog.md</code> after checking out all changes:<ul>
 <li>https://github.com/square/leakcanary/compare/v{{ flipper_ktp.release }}...main</li>
@@ -243,39 +113,46 @@ git checkout -b release_{{ flipper_ktp.next_release }}
 </ul>
 <pre><code>git diff
 </code></pre>
+
 <ul>
 <li>Commit all local changes</li>
 </ul>
 <pre><code>git commit -am &quot;Prepare {{ flipper_ktp.next_release }} release&quot;
 </code></pre>
+
 <ul>
 <li>Perform a clean build</li>
 </ul>
 <pre><code>./gradlew clean
 ./gradlew build
 </code></pre>
+
 <ul>
 <li>Create a tag and push it</li>
 </ul>
 <pre><code>git tag v{{ flipper_ktp.next_release }}
 git push origin v{{ flipper_ktp.next_release }}
 </code></pre>
+
 <ul>
 <li>Make sure you have valid credentials in <code>~/.gradle/gradle.properties</code> to upload the artifacts</li>
 </ul>
 <pre><code>SONATYPE_NEXUS_USERNAME=
 SONATYPE_NEXUS_PASSWORD=
 </code></pre>
+
 <ul>
 <li>Upload the artifacts to Sonatype OSS Nexus</li>
 </ul>
 <pre><code>./gradlew uploadArchives --no-daemon --no-parallel
 </code></pre>
+
 <ul>
 <li>Generate the CLI zip</li>
 </ul>
 <pre><code>./gradlew shark-cli:distZip
 </code></pre>
+
 <ul>
 <li>Release to Maven Central<ul>
 <li>Login to Sonatype OSS Nexus: https://oss.sonatype.org/</li>
@@ -292,21 +169,25 @@ SONATYPE_NEXUS_PASSWORD=
 git pull
 git merge --no-ff release_{{ flipper_ktp.next_release }}
 </code></pre>
+
 <ul>
 <li>Update <code>VERSION_NAME</code> in <code>gradle.properties</code> (increase version and add <code>-SNAPSHOT</code>)</li>
 </ul>
-<pre><code class="language-gradle">VERSION_NAME=REPLACE_WITH_NEXT_VERSION_NUMBER-SNAPSHOT
+<pre><code class="gradle">VERSION_NAME=REPLACE_WITH_NEXT_VERSION_NUMBER-SNAPSHOT
 </code></pre>
+
 <ul>
 <li>Commit your changes</li>
 </ul>
 <pre><code>git commit -am &quot;Prepare for next development iteration&quot;
 </code></pre>
+
 <ul>
 <li>Push your changes</li>
 </ul>
 <pre><code>git push
 </code></pre>
+
 <ul>
 <li>Go to <a href="https://github.com/square/leakcanary/milestones">Milestones</a>, close the corresponding milestones and create a new milestone.</li>
 <li>Wait for the release to be available <a href="https://repo1.maven.org/maven2/com/squareup/leakcanary/leakcanary-android/">on Maven Central</a>.</li>
@@ -315,59 +196,94 @@ git merge --no-ff release_{{ flipper_ktp.next_release }}
 </ul>
 <pre><code>See [Change Log](https://square.github.io/leakcanary/changelog#version-20-alpha-2-2019-05-21)
 </code></pre>
+
 <ul>
 <li>Add the CLIP zip from <code>shark-cli/build/distributions/</code> to the release.</li>
 <li>Make a pull request to <a href="https://brew.sh/">brew</a>. Just execute </li>
 </ul>
-<pre><code class="language-bash">brew bump-formula-pr --url https://github.com/square/leakcanary/releases/download/v{{ flipper_ktp.next_release }}/shark-cli-{{ flipper_ktp.next_release }}.zip leakcanary-shark
+<pre><code class="bash">brew bump-formula-pr --url https://github.com/square/leakcanary/releases/download/v{{ flipper_ktp.next_release }}/shark-cli-{{ flipper_ktp.next_release }}.zip leakcanary-shark
 </code></pre>
+
 <p>(The url parameter should point at zip from this new release). <br />
 In case of problems, read <a href="https://docs.brew.sh/How-To-Open-a-Homebrew-Pull-Request">brew docs</a>.<br />
-* Tell your friends, update all of your apps, and tweet the new release. As a nice extra touch, mention external contributions.</p>
-                
-              
-              
-                
-
-
-              
-            </article>
-          </div>
+* Tell your friends, update all of your apps, and tweet the new release. As a nice extra touch, mention external contributions.</p></div>
+            </div>
         </div>
-      </main>
-      
-        
-<footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-      </div>
-      
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
-  </div>
-</footer>
-      
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
-    
-      <script src="../assets/javascripts/vendor.0ac82a11.min.js"></script>
-      <script src="../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
-      
-      <script>
-        app = initialize({
-          base: "..",
-          features: [],
-          search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
-      
-    
-  </body>
+</div>
+
+    </body>
 </html>
